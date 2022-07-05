@@ -1,10 +1,12 @@
 #include <WinSock2.h>
+#include "server.hpp"
 
 class logger_server
 {
-    int port = 8006;
+    int in_port {8006};
 
-    SOCKET connection;
+    server logger {in_port};
+
 
 public:
     void run();
