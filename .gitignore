@@ -1,4 +1,5 @@
 .vscode
+build
 math_model/build
 control_system/build
 logger/build

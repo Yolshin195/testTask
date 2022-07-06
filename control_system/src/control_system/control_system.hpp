@@ -1,5 +1,6 @@
 // #include "server.hpp"
 #include "client.hpp"
+#include "server.hpp"
 
 class control_system
 {
@@ -17,6 +18,8 @@ class control_system
     double period {0.01};
 
     client logger {log_port};
+    server in_math_model {in_port};
+    client out_math_model {out_port};
 
     void init();
     

@@ -8,6 +8,8 @@ void control_system::update()
 
     while(1)
     {
+        in_math_model.read(msg, sizeof(msg));
+        out_math_model.write(msg, sizeof(msg));
 		logger.write(msg, sizeof(msg));
         Sleep(1000);
     }
