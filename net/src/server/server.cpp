@@ -19,7 +19,6 @@ void server::init()
 	this->listener = socket(AF_INET, SOCK_STREAM, 0);
 	bind(this->listener, (SOCKADDR *)&addr, sizeof(addr));
 	listen(this->listener, SOMAXCONN);
-
 	connect();
 }
 

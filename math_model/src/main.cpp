@@ -1,4 +1,19 @@
 #include <iostream>
+#include "math_model/math_model.hpp"
+
+int main(int argc, char *argv[])
+{
+	math_model mm;
+	
+	mm.init();
+
+	while (1)
+	{
+		
+		mm.update();
+		Sleep(1000);
+	}
+}
 
 class config
 {
@@ -118,7 +133,7 @@ input:
 example:
 	math_model -i 8004 -o 8005 --Tm 0.5 --Km 10 -t 0.01
 */
-int main(int argc, char *argv[])
+int mainT(int argc, char *argv[])
 {
 	mathModel m;
 	controlSystem cs;

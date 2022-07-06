@@ -15,14 +15,21 @@ class control_system
     double reference_value {10};
     double prop {1};
     double integ {0.1};
-    double period {0.01};
+    double period {0.01}; //dt
 
     client logger {log_port};
-    server in_math_model {in_port};
+    //server in_math_model {in_port};
     client out_math_model {out_port};
 
-    void init();
+    //char msg[256];
+
+    float dt = 0.01; //period
+	float edt = 0;
+    float count(float feedback);
+
+    void get_in_math_model();
     
 public:
+    void init();
     void update();
 };
