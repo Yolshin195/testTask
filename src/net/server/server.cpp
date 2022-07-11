@@ -1,6 +1,5 @@
 #include "server.hpp"
 #include <iostream>
-#include "../signal/signal.hpp"
 
 void server::init()
 {
@@ -29,31 +28,34 @@ void server::connect()
 	std::cout << "new connection!" << std::endl;
 }
 
-void server::read(char *msg, int size)
-{
-    int status = recv(this->connection, msg, size, 0);
-    if (status == -1)
-    {
-		std::cout << "close connection!" << std::endl;
-        connect();
-        recv(this->connection, msg, size, 0);
-    }
+// void server::read(char *msg, int size)
+// {
+//     int status = recv(this->connection, msg, size, 0);
+//     if (status == -1)
+//     {
+// 		std::cout << "close connection!" << std::endl;
+//         connect();
+//         recv(this->connection, msg, size, 0);
+//     }
     
-}
+// }
 
-signal server::read()
-{
-	signal s;
-	std::string value;
-	int size;
+int server::read(std::stringstream &buf)
+{	
+	int size = 0;
+    int status = recv(this->connection, (char*)(&size), sizeof(int), 0);
+	std::cout << "read size: " << size << std::endl;
 
+	char* data = new char[size];
+	status = recv(this->connection, data, size, 0);
+	buf << data;
 
-    int status = recv(this->connection, , sizeof(int), 0);
     if (status == -1)
     {
 		std::cout << "close connection!" << std::endl;
         connect();
+		return -1;
     }
 
-	return s;
+	return status;
 }

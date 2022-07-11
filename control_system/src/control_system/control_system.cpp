@@ -30,6 +30,8 @@ void control_system::update()
     while(1)
     {
 
+		sprintf(msg, "%lf", "2.10000000056");
+		std::cout << msg << std::endl;
         out_math_model.write(msg, sizeof(msg));
 		logger.write(msg, sizeof(msg));
         Sleep(1000);

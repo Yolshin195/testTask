@@ -1,5 +1,5 @@
 #include <WinSock2.h>
-#include "../signal/signal.hpp"
+#include <sstream>
 
 class client
 {
@@ -16,6 +16,6 @@ public:
         init();
     };
     void init();
-    void write(char *msg, int size);
-    void write(signal siganl);
+    // void write(char *msg, int size);
+    int write(std::stringstream &buff);
 };

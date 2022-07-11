@@ -1,4 +1,5 @@
 #include <WinSock2.h>
+#include <sstream>
 
 class server
 {
@@ -12,7 +13,7 @@ class server
     void connect();
 
 public:
-    void read(char *msg, int size);
-    signal read();
+    //void read(char *msg, int size);
+    int read(std::stringstream &buf);
     server(int port) : port(port) { init(); }
 };
