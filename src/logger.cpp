@@ -1,10 +1,14 @@
 #include <iostream>
 #include <sstream>
+#include <fstream>
 #include "net/server/server.hpp"
+#include <string>
 class logger
 {
     int port {8006};
     server s {port};
+    std::string filename;
+    std::ofstream file;
 
     double math_in = 0;
     double math_out = 0;
@@ -12,10 +16,13 @@ class logger
     double control_fb = 0;
     double control_out = 0;
 
+    void write_to_file();
+
 public:
     void init();
     void update();
     void run();
+    ~logger();
 };
 
 int main(int argc, char* argv[])
@@ -29,7 +36,13 @@ int main(int argc, char* argv[])
 
 void logger::init()
 {
-
+    filename = "log.csv";
+    file.open(filename, std::ios_base::in|std::ios_base::ate);
+    if (!file)
+    {
+        std::cout << "file open error, filename " << filename << std::endl;
+        exit(1);
+    }
 }
 
 void logger::update()
@@ -37,13 +50,15 @@ void logger::update()
     using std::cout;
     using std::endl;
 
-    std::stringstream ss;
+    std::stringstream in;
 
-    int status = s.read(ss);
+    int status = s.read(in);
 
-    cout << "read " << status << ", value (" << ss.str().length() << ") " << ss.str() << endl;
+    cout << "read " << status << ", value (" << in.str().length() << ") " << in.str() << endl;
 
-    ss >> math_in >> math_out >> control_in >> control_fb >> control_out;
+    in >> math_in >> math_out >> control_in >> control_fb >> control_out;
+
+    write_to_file();
 
     cout 
         << "math_in " << math_in 
@@ -59,4 +74,26 @@ void logger::run()
         this->update();
         //Sleep(100);
     }
+}
+
+void logger::write_to_file()
+{
+    if (!file)
+    {
+        std::cout << "file closed, filename " << filename << std::endl;
+    }
+
+    file 
+        << math_in 
+        << ";" << math_out 
+        << ";" << control_in 
+        << ";" << control_fb 
+        << ";" << control_out << std::endl;
+    file.flush();
+}
+
+logger::~logger()
+{
+    file.close();
+    std::cout << "destructor" << std::endl;
 }
