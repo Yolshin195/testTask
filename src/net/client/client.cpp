@@ -33,16 +33,6 @@ void client::connect_socket()
     }
 }
 
-// void client::write(char *msg, int size)
-// {
-//     int s = send(connection, msg, size, 0);
-// 	std::cout << "status logger: " << s << std::endl;
-// 	if (s == -1) 
-// 	{
-// 		init();
-// 	}
-// }
-
 int client::write(std::stringstream &buf)
 {
 	std::string value = buf.str(); 

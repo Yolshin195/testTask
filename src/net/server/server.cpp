@@ -28,18 +28,6 @@ void server::connect()
 	std::cout << "new connection!" << std::endl;
 }
 
-// void server::read(char *msg, int size)
-// {
-//     int status = recv(this->connection, msg, size, 0);
-//     if (status == -1)
-//     {
-// 		std::cout << "close connection!" << std::endl;
-//         connect();
-//         recv(this->connection, msg, size, 0);
-//     }
-    
-// }
-
 int server::read(std::stringstream &buf)
 {	
 	int size = 0;

@@ -13,7 +13,6 @@ class server
     void connect();
 
 public:
-    //void read(char *msg, int size);
     int read(std::stringstream &buf);
     server(int port) : port(port) { init(); }
 };

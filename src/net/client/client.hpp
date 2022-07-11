@@ -16,6 +16,5 @@ public:
         init();
     };
     void init();
-    // void write(char *msg, int size);
     int write(std::stringstream &buff);
 };
