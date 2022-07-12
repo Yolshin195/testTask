@@ -36,11 +36,11 @@ void client::connect_socket()
 int client::write(std::stringstream &buf)
 {
 	std::string value = buf.str(); 
-	int size = value.size();
+	unsigned int size = value.length();
 	
 	int status = send(connection, (char*)&size, sizeof(int), 0);
 
-	status = send(connection, value.c_str(), value.size(), 0);
+	status = send(connection, value.c_str(), size, 0);
 
 	if (status == -1) 
 	{

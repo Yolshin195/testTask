@@ -30,13 +30,14 @@ void server::connect()
 
 int server::read(std::stringstream &buf)
 {	
-	int size = 0;
+	unsigned int size = 0;
     int status = recv(this->connection, (char*)(&size), sizeof(int), 0);
 	std::cout << "read size: " << size << std::endl;
 
 	char* data = new char[size];
 	status = recv(this->connection, data, size, 0);
 	buf << data;
+	delete []data;
 
     if (status == -1)
     {
