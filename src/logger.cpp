@@ -37,12 +37,20 @@ int main(int argc, char* argv[])
 void logger::init()
 {
     filename = "log.csv";
-    file.open(filename, std::ios_base::in|std::ios_base::ate);
+    file.open(filename);
     if (!file)
     {
         std::cout << "file open error, filename " << filename << std::endl;
         exit(1);
     }
+
+    file 
+        << "math_in"
+        << "; math_out"
+        << "; control_in"
+        << "; control_fb"
+        << "; control_out" << std::endl;
+    file.flush();
 }
 
 void logger::update()
